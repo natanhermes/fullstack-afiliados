@@ -7,15 +7,21 @@
     "start:dev": "tsx watch src/server.ts",
     "start:prod": "node build/server.js",
     "build": "tsup src --out-dir build",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "test:coverage": "vitest run --coverage",
+    "test:ui": "vitest --ui"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "@types/bcryptjs": "2.4.2",
     "@types/node": "18.15.11",
     "@typescript-eslint/eslint-plugin": "5.57.1",
     "@typescript-eslint/parser": "5.57.1",
+    "@vitest/coverage-c8": "0.29.8",
+    "@vitest/ui": "0.29.8",
     "eslint": "8.37.0",
     "eslint-config-prettier": "8.8.0",
     "eslint-plugin-prettier": "4.2.1",
@@ -23,10 +29,13 @@
     "prisma": "4.12.0",
     "tsup": "6.7.0",
     "tsx": "3.12.6",
-    "typescript": "5.0.3"
+    "typescript": "5.0.3",
+    "vite-tsconfig-paths": "4.0.8",
+    "vitest": "0.29.8"
   },
   "dependencies": {
     "@prisma/client": "4.12.0",
+    "bcryptjs": "2.4.3",
     "dotenv": "16.0.3",
     "fastify": "4.15.0",
     "zod": "3.21.4"
