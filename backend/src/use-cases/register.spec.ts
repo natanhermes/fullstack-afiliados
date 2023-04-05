@@ -33,8 +33,8 @@ describe('Register Use Case', () => {
     };
     await registerUseCase.execute(userData);
 
-    const duplicateRegister = () => registerUseCase.execute(userData);
-    await expect(duplicateRegister).rejects.toBeInstanceOf(
+    const handleDuplicateRegister = () => registerUseCase.execute(userData);
+    await expect(handleDuplicateRegister).rejects.toBeInstanceOf(
       UserAlreadyExistsError,
     );
   });
