@@ -1,19 +1,25 @@
 import { InMemoryUsersRepository } from '@/repositories/in-memory/in-memory-users-repository';
-import { describe, expect, it } from 'vitest';
+import { beforeEach, describe, expect, it } from 'vitest';
 import { RegisterUseCase } from './register';
 import { compare } from 'bcryptjs';
 import { UserAlreadyExistsError } from './errors/user-already-exists-error';
 
+let usersRepository: InMemoryUsersRepository;
+let sut: RegisterUseCase;
+
 describe('Register Use Case', () => {
+  beforeEach(() => {
+    usersRepository = new InMemoryUsersRepository();
+    sut = new RegisterUseCase(usersRepository);
+  });
+
   it('should be hash user password upon registration', async () => {
-    const usersRepository = new InMemoryUsersRepository();
-    const registerUseCase = new RegisterUseCase(usersRepository);
     const userData = {
       name: 'John Doe',
       email: 'johndoe2@example.com',
       password: '123456',
     };
-    const { user } = await registerUseCase.execute(userData);
+    const { user } = await sut.execute(userData);
 
     const isPasswordCorrectlyHashed = await compare(
       userData.password,
@@ -24,30 +30,26 @@ describe('Register Use Case', () => {
   });
 
   it('should not be able to register with same email twice', async () => {
-    const usersRepository = new InMemoryUsersRepository();
-    const registerUseCase = new RegisterUseCase(usersRepository);
     const userData = {
       name: 'John Doe',
       email: 'johndoe2@example.com',
       password: '123456',
     };
-    await registerUseCase.execute(userData);
+    await sut.execute(userData);
 
-    const handleDuplicateRegister = () => registerUseCase.execute(userData);
+    const handleDuplicateRegister = () => sut.execute(userData);
     await expect(handleDuplicateRegister).rejects.toBeInstanceOf(
       UserAlreadyExistsError,
     );
   });
 
   it('should be able to register', async () => {
-    const usersRepository = new InMemoryUsersRepository();
-    const registerUseCase = new RegisterUseCase(usersRepository);
     const userData = {
       name: 'John Doe',
       email: 'johndoe2@example.com',
       password: '123456',
     };
-    const { user } = await registerUseCase.execute(userData);
+    const { user } = await sut.execute(userData);
     expect(user.id).toEqual(expect.any(String));
   });
 });
