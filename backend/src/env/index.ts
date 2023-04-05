@@ -4,7 +4,7 @@ import { z } from 'zod';
 enum NodeEnvType {
   DEV = 'dev',
   TEST = 'test',
-  PRODUCTION = 'production',
+  PRODUCTION = 'prod',
 }
 
 /**
