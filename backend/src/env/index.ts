@@ -7,6 +7,10 @@ enum NodeEnvType {
   PRODUCTION = "production",
 }
 
+/**
+ * 
+  Object containing the rules for validating the environment variables of the .env file.
+ */
 const envSchema = z.object({
   NODE_ENV: z
     .enum([NodeEnvType.DEV, NodeEnvType.TEST, NodeEnvType.PRODUCTION])
@@ -14,6 +18,9 @@ const envSchema = z.object({
   PORT: z.coerce.number().default(3333),
 });
 
+/**
+ * Realiza a validação das variáveis ambiente com base no schema.
+ */
 const _env = envSchema.safeParse(process.env);
 
 if (_env.success === false) {
