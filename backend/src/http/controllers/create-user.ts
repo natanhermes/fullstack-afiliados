@@ -2,21 +2,21 @@ import { FastifyRequest, FastifyReply } from 'fastify';
 
 import { z } from 'zod';
 import { UserAlreadyExistsError } from '@/use-cases/errors/user-already-exists-error';
-import { makeRegisterUseCase } from '@/use-cases/factories/make-register-use-case';
+import { makeCreateUserUseCase } from '@/use-cases/factories/make-create-user-use-case';
 
-export async function register(req: FastifyRequest, reply: FastifyReply) {
-  const registerBodySchema = z.object({
+export async function createUser(req: FastifyRequest, reply: FastifyReply) {
+  const createUserBodySchema = z.object({
     name: z.string(),
     email: z.string().email(),
     password: z.string().min(6),
   });
 
-  const { name, email, password } = registerBodySchema.parse(req.body);
+  const { name, email, password } = createUserBodySchema.parse(req.body);
 
   try {
-    const registerUseCase = makeRegisterUseCase();
+    const createUserUseCase = makeCreateUserUseCase();
 
-    await registerUseCase.execute({
+    await createUserUseCase.execute({
       name,
       email,
       password,

@@ -1,9 +1,9 @@
 import { InMemoryProductsRepository } from '@/repositories/in-memory/in-memory-products-repository';
 import { beforeEach, describe, expect, it } from 'vitest';
-import { RegisterProductsUseCase } from './register-product-use-case';
+import { CreateProductsUseCase } from './create-product-use-case';
 
 let productsRepository: InMemoryProductsRepository;
-let sut: RegisterProductsUseCase;
+let sut: CreateProductsUseCase;
 let productMocks: {
   name: string;
   price: number;
@@ -13,7 +13,7 @@ let productMocks: {
 describe('Products Use Case', () => {
   beforeEach(() => {
     productsRepository = new InMemoryProductsRepository();
-    sut = new RegisterProductsUseCase(productsRepository);
+    sut = new CreateProductsUseCase(productsRepository);
     productMocks = {
       name: 'John Doe Class',
       amountSales: 0,
@@ -22,7 +22,7 @@ describe('Products Use Case', () => {
     };
   });
 
-  it('should be able to register products', async () => {
+  it('should be able to create products', async () => {
     const { amountSales, name, price, collaboratorId } = productMocks;
     const { product } = await sut.execute({
       amountSales,
