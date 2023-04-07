@@ -71,8 +71,8 @@ describe('Authenticate Use Case', () => {
 
     const handleAuthenticateIncorrrectCredentials = () =>
       sut.execute(incorrectCredentialsToAuthenticate);
-    expect(handleAuthenticateIncorrrectCredentials).rejects.toBeInstanceOf(
-      InvalidCredentialsError,
-    );
+    await expect(
+      handleAuthenticateIncorrrectCredentials,
+    ).rejects.toBeInstanceOf(InvalidCredentialsError);
   });
 });
