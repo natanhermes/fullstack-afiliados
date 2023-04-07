@@ -1,14 +1,14 @@
 import { InMemoryCollaboratorsRepository } from '@/repositories/in-memory/in-memory-collaborator-repository';
 import { beforeEach, describe, expect, it } from 'vitest';
-import { RegisterCollaboratorUseCase } from './register-collaborator-use-case';
+import { CreateCollaboratorUseCase } from './create-collaborator-use-case';
 
 let collaboratorsRepository: InMemoryCollaboratorsRepository;
-let sut: RegisterCollaboratorUseCase;
+let sut: CreateCollaboratorUseCase;
 let collaboratorMocks: { name: string; type: string; comissionBalance: number };
 describe('Collaborator Use Case', () => {
   beforeEach(() => {
     collaboratorsRepository = new InMemoryCollaboratorsRepository();
-    sut = new RegisterCollaboratorUseCase(collaboratorsRepository);
+    sut = new CreateCollaboratorUseCase(collaboratorsRepository);
     collaboratorMocks = {
       name: 'John Doe',
       type: 'producer',
@@ -16,7 +16,7 @@ describe('Collaborator Use Case', () => {
     };
   });
 
-  it('should be able to register collaborator', async () => {
+  it('should be able to create collaborator', async () => {
     const { collab } = await sut.execute({
       name: collaboratorMocks.name,
       type: collaboratorMocks.type,

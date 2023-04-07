@@ -1,18 +1,18 @@
 import { TransactionsRepository } from '@/repositories/transactions-repository';
 import { Transaction } from '@prisma/client';
 
-interface RegisterTransactionsUseCaseRequest {
+interface CreateTransactionsUseCaseRequest {
   type: number;
   collaboratorId: string;
   productId: string;
   userId: string;
 }
 
-interface RegisterTransactionsUseCaseResponse {
+interface CreateTransactionsUseCaseResponse {
   transaction: Transaction;
 }
 
-export class RegisterTransactionsUseCase {
+export class CreateTransactionsUseCase {
   constructor(private transactionsRepository: TransactionsRepository) {}
 
   async execute({
@@ -20,7 +20,7 @@ export class RegisterTransactionsUseCase {
     collaboratorId,
     productId,
     userId,
-  }: RegisterTransactionsUseCaseRequest): Promise<RegisterTransactionsUseCaseResponse> {
+  }: CreateTransactionsUseCaseRequest): Promise<CreateTransactionsUseCaseResponse> {
     const transaction = await this.transactionsRepository.create({
       type,
       collaborator_id: collaboratorId,

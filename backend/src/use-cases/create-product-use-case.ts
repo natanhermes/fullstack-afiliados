@@ -1,18 +1,18 @@
 import { ProductsRepository } from '@/repositories/products-repository';
 import { Product } from '@prisma/client';
 
-interface RegisterProductsUseCaseRequest {
+interface CreateProductsUseCaseRequest {
   name: string;
   price: number;
   amountSales: number;
   collaboratorId: string;
 }
 
-interface RegisterProductsUseCaseResponse {
+interface CreateProductsUseCaseResponse {
   product: Product;
 }
 
-export class RegisterProductsUseCase {
+export class CreateProductsUseCase {
   constructor(private productsRepository: ProductsRepository) {}
 
   async execute({
@@ -20,7 +20,7 @@ export class RegisterProductsUseCase {
     amountSales,
     price,
     collaboratorId,
-  }: RegisterProductsUseCaseRequest): Promise<RegisterProductsUseCaseResponse> {
+  }: CreateProductsUseCaseRequest): Promise<CreateProductsUseCaseResponse> {
     const product = await this.productsRepository.create({
       name,
       amount_sales: amountSales,
