@@ -22,6 +22,7 @@ model Collaborator {
   id String @id @default(uuid())
 
   type               String
+  name               String
   commission_balance Int
 
   created_at   DateTime      @default(now())
