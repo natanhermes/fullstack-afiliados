@@ -4,7 +4,7 @@ import { Collaborator } from '@prisma/client';
 interface CreateCollaboratorUseCaseRequest {
   type: string;
   name: string;
-  commissionBalance: number;
+  comissionBalance: number;
 }
 
 interface CreateCollaboratorUseCaseResponse {
@@ -17,12 +17,12 @@ export class CreateCollaboratorUseCase {
   async execute({
     name,
     type,
-    commissionBalance,
+    comissionBalance,
   }: CreateCollaboratorUseCaseRequest): Promise<CreateCollaboratorUseCaseResponse> {
     const collab = await this.collaboratorsRepository.create({
       name,
       type,
-      commission_balance: commissionBalance,
+      commission_balance: comissionBalance,
     });
 
     return {
