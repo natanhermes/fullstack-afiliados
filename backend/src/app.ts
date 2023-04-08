@@ -1,9 +1,9 @@
 import fastifyJwt from '@fastify/jwt';
 import fastify from 'fastify';
-import { appRoutes } from './http/routes';
 import { ZodError } from 'zod';
 import { env } from './env';
 import { productsRoutes } from './http/controllers/products/products.routes';
+import { usersRoutes } from './http/controllers/users/users.routes';
 import { collaboratorsRoutes } from './http/controllers/collaborators/collaborators.routes';
 import { transactionsRoutes } from './http/controllers/transactions/transaction.routes';
 
@@ -13,6 +13,7 @@ app.register(fastifyJwt, {
   secret: env.JWT_SECRET,
 });
 
+app.register(usersRoutes);
 app.register(collaboratorsRoutes);
 app.register(productsRoutes);
 app.register(transactionsRoutes);
