@@ -1,5 +1,6 @@
 import { ProductsRepository } from '@/repositories/products-repository';
 import { Product } from '@prisma/client';
+import { ItemAlreadyExistsError } from './errors/item-already-exists-error';
 
 interface CreateProductsUseCaseRequest {
   name: string;
@@ -21,6 +22,13 @@ export class CreateProductsUseCase {
     price,
     collaboratorId,
   }: CreateProductsUseCaseRequest): Promise<CreateProductsUseCaseResponse> {
+    const productAlreadyExists =
+      await this.productsRepository.findProductByName(name);
+
+    if (productAlreadyExists) {
+      throw new ItemAlreadyExistsError();
+    }
+
     const product = await this.productsRepository.create({
       name,
       amount_sales: amountSales,
