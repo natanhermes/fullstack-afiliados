@@ -24,7 +24,7 @@ model Collaborator {
 
   type               String
   name               String
-  commission_balance Int
+  commission_balance Int?
 
   created_at   DateTime      @default(now())
   products     Product[]
@@ -35,7 +35,7 @@ model Collaborator {
 
 model Product {
   id           String @id @default(uuid())
-  name         String
+  name         String @unique
   price        Int
   amount_sales Int
 
