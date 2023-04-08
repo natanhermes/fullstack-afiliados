@@ -11,6 +11,7 @@ import {
   mockTransaction1,
   mockTransaction2,
 } from '@/utils/test/mocks/mocks-transactions';
+import { mockUser } from '@/utils/test/mocks/mocks-users';
 
 describe('Transactions History (e2e)', () => {
   beforeAll(async () => {
@@ -21,10 +22,12 @@ describe('Transactions History (e2e)', () => {
   });
 
   it('should be able to list the history of transactions', async () => {
-    const { token, user } = await createAuthenticateUser(app);
+    const { token, user } = await createAuthenticateUser(app, mockUser);
+
+    const collabData = { ...mockCollab, userId: user.id };
     const { body: responseCollab } = await createCollaboratorToE2E(
       app,
-      mockCollab,
+      collabData,
       token,
     );
 

@@ -7,6 +7,7 @@ import { mockCollab } from '@/utils/test/mocks/mocks-collaborators';
 import { createProductsToE2E } from '@/utils/test/create-products-to-e2e';
 import { mockProduct } from '@/utils/test/mocks/mocks-products';
 import { mockTransaction1 } from '@/utils/test/mocks/mocks-transactions';
+import { mockUser } from '@/utils/test/mocks/mocks-users';
 
 describe('Create Transaction (e2e)', () => {
   beforeAll(async () => {
@@ -17,10 +18,12 @@ describe('Create Transaction (e2e)', () => {
   });
 
   it('should be able to create transaction', async () => {
-    const { token, user } = await createAuthenticateUser(app);
+    const { token, user } = await createAuthenticateUser(app, mockUser);
+
+    const collabData = { ...mockCollab, userId: user.id };
     const { body: responseCollab } = await createCollaboratorToE2E(
       app,
-      mockCollab,
+      collabData,
       token,
     );
 

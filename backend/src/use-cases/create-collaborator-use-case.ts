@@ -3,8 +3,8 @@ import { Collaborator } from '@prisma/client';
 
 interface CreateCollaboratorUseCaseRequest {
   type: string;
-  name: string;
   comissionBalance: number;
+  userId?: string;
 }
 
 interface CreateCollaboratorUseCaseResponse {
@@ -15,14 +15,14 @@ export class CreateCollaboratorUseCase {
   constructor(private collaboratorsRepository: CollaboratorsRepository) {}
 
   async execute({
-    name,
     type,
     comissionBalance,
+    userId,
   }: CreateCollaboratorUseCaseRequest): Promise<CreateCollaboratorUseCaseResponse> {
     const collab = await this.collaboratorsRepository.create({
-      name,
       type,
       commission_balance: comissionBalance,
+      user_id: userId,
     });
 
     return {

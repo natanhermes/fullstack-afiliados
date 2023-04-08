@@ -5,6 +5,7 @@ import { mockProduct } from '@/utils/test/mocks/mocks-products';
 import { createCollaboratorToE2E } from '@/utils/test/create-collaborator-to-e2e';
 import { createProductsToE2E } from '@/utils/test/create-products-to-e2e';
 import { mockCollab } from '@/utils/test/mocks/mocks-collaborators';
+import { mockUser, mockUser2 } from '@/utils/test/mocks/mocks-users';
 
 describe('Create Product (e2e)', () => {
   beforeAll(async () => {
@@ -15,11 +16,13 @@ describe('Create Product (e2e)', () => {
   });
 
   it('should be able to create product', async () => {
-    const { token } = await createAuthenticateUser(app);
+    const { token, user } = await createAuthenticateUser(app, mockUser);
+
+    const collabData = { ...mockCollab, userId: user.id };
 
     const collabResponse = await createCollaboratorToE2E(
       app,
-      mockCollab,
+      collabData,
       token,
     );
     const { collab } = collabResponse.body;
@@ -36,11 +39,13 @@ describe('Create Product (e2e)', () => {
   });
 
   it('should not be able to create product with same name twice', async () => {
-    const { token } = await createAuthenticateUser(app);
+    const { token, user } = await createAuthenticateUser(app, mockUser2);
+
+    const collabData = { ...mockCollab, userId: user.id };
 
     const collabResponse = await createCollaboratorToE2E(
       app,
-      mockCollab,
+      collabData,
       token,
     );
     const { collab } = collabResponse.body;
@@ -49,7 +54,6 @@ describe('Create Product (e2e)', () => {
     await createProductsToE2E(app, product, token);
 
     const resWithError = await createProductsToE2E(app, product, token);
-
     expect(resWithError.statusCode).toEqual(409);
     expect(resWithError.body).toEqual(
       expect.objectContaining({

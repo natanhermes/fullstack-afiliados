@@ -1,13 +1,22 @@
 import { FastifyInstance } from 'fastify';
 import req from 'supertest';
-import { mockUser } from './mocks/mocks-users';
 
-export async function createAuthenticateUser(app: FastifyInstance) {
-  await req(app.server).post('/users').send(mockUser);
+interface MockUserData {
+  id: string;
+  name: string;
+  email: string;
+  password: string;
+}
+
+export async function createAuthenticateUser(
+  app: FastifyInstance,
+  user: MockUserData,
+) {
+  await req(app.server).post('/users').send(user);
 
   const authResponse = await req(app.server).post('/sessions').send({
-    email: mockUser.email,
-    password: mockUser.password,
+    email: user.email,
+    password: user.password,
   });
 
   const { token } = authResponse.body;
