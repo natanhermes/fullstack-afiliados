@@ -3,6 +3,7 @@ import { InMemoryUsersRepository } from '@/repositories/in-memory/in-memory-user
 import { hash } from 'bcryptjs';
 import { GetUserProfileUseCase } from './get-user-profile-use-case';
 import { ResourceNotFoundError } from './errors/resource-not-found-error';
+import { mockUser } from '@/utils/test/mocks/mocks-users';
 
 let usersRepository: InMemoryUsersRepository;
 /**
@@ -17,11 +18,7 @@ describe('Get User Profile Use Case', () => {
   });
 
   it('should be able to get user profile', async () => {
-    const { email, name, password } = {
-      name: 'John Doe',
-      email: 'johndoe@example.com',
-      password: '123456',
-    };
+    const { email, name, password } = mockUser;
 
     const createdUser = await usersRepository.create({
       name,
