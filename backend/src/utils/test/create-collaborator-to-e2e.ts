@@ -3,9 +3,9 @@ import { FastifyInstance } from 'fastify';
 
 interface MockCollaboratorData {
   id: string;
-  name: string;
   type: string;
   comissionBalance: number;
+  userId: string;
 }
 
 export async function createCollaboratorToE2E(

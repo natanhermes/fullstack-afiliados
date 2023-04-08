@@ -9,20 +9,20 @@ export async function createCollaborator(
 ) {
   const createProductBodySchema = z.object({
     type: z.string(),
-    name: z.string(),
     comissionBalance: z.number().default(0),
+    userId: z.string(),
   });
 
-  const { name, type, comissionBalance } = createProductBodySchema.parse(
+  const { type, comissionBalance, userId } = createProductBodySchema.parse(
     req.body,
   );
 
   const createCollaboratorUseCase = makeCreateCollaboratorUseCase();
 
   const collab = await createCollaboratorUseCase.execute({
-    name,
     type,
     comissionBalance,
+    userId,
   });
 
   return reply.status(201).send(collab);
