@@ -13,9 +13,8 @@ model User {
   email         String @unique
   password_hash String
 
-  created_at   DateTime      @default(now())
-  Transaction  Transaction[]
-  Collaborator Collaborator?
+  created_at  DateTime      @default(now())
+  Transaction Transaction[]
 
   @@map("users")
 }
@@ -24,14 +23,12 @@ model Collaborator {
   id String @id @default(uuid())
 
   type               String
+  name               String
   commission_balance Int?
 
   created_at   DateTime      @default(now())
   products     Product[]
   transactions Transaction[]
-
-  user    User?   @relation(fields: [user_id], references: [id])
-  user_id String? @unique
 
   @@map("collaborators")
 }

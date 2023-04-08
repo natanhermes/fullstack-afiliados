@@ -3,7 +3,6 @@ import { afterAll, beforeAll, describe, expect, it } from 'vitest';
 import { createAuthenticateUser } from '@/utils/test/create-and-authenticate-user';
 import { mockCollab } from '@/utils/test/mocks/mocks-collaborators';
 import { createCollaboratorToE2E } from '@/utils/test/create-collaborator-to-e2e';
-import { mockUser } from '@/utils/test/mocks/mocks-users';
 
 describe('Create Collaborator (e2e)', () => {
   beforeAll(async () => {
@@ -14,15 +13,14 @@ describe('Create Collaborator (e2e)', () => {
   });
 
   it('should be able to create collaborator', async () => {
-    const { token, user } = await createAuthenticateUser(app, mockUser);
+    const { token } = await createAuthenticateUser(app);
 
-    const collabData = { ...mockCollab, userId: user.id };
-    const res = await createCollaboratorToE2E(app, collabData, token);
+    const res = await createCollaboratorToE2E(app, mockCollab, token);
 
     expect(res.statusCode).toEqual(201);
     expect(res.body.collab).toEqual(
       expect.objectContaining({
-        user_id: user.id,
+        name: mockCollab.name,
       }),
     );
   });

@@ -13,7 +13,7 @@ describe('Profile (e2e)', () => {
   });
 
   it('should be able to get user profile', async () => {
-    const { token } = await createAuthenticateUser(app, mockUser);
+    const { token } = await createAuthenticateUser(app);
 
     const profileResponse = await req(app.server)
       .get('/me')
