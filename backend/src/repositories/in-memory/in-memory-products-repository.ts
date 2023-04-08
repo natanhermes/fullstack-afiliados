@@ -4,6 +4,15 @@ import { randomUUID } from 'node:crypto';
 
 export class InMemoryProductsRepository implements ProductsRepository {
   public items: Product[] = [];
+  async findProductByName(name: string): Promise<Product | null> {
+    const product = this.items.find((el) => el.name === name);
+
+    if (!product) {
+      return null;
+    }
+
+    return product;
+  }
   async findProductById(id: string): Promise<Product | null> {
     const product = this.items.find((el) => el.id === id);
 
