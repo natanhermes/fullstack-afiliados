@@ -5,11 +5,7 @@ import { mockCollab } from '@/utils/test/mocks/mocks-collaborators';
 
 let collaboratorsRepository: InMemoryCollaboratorsRepository;
 let sut: CreateCollaboratorUseCase;
-let collaboratorMocks: {
-  userId: string;
-  type: string;
-  comissionBalance: number;
-};
+let collaboratorMocks: { name: string; type: string; comissionBalance: number };
 describe('Collaborator Use Case', () => {
   beforeEach(() => {
     collaboratorsRepository = new InMemoryCollaboratorsRepository();
@@ -19,7 +15,7 @@ describe('Collaborator Use Case', () => {
 
   it('should be able to create collaborator', async () => {
     const { collab } = await sut.execute({
-      userId: collaboratorMocks.userId,
+      name: collaboratorMocks.name,
       type: collaboratorMocks.type,
       comissionBalance: collaboratorMocks.comissionBalance,
     });
