@@ -2,6 +2,7 @@ import { InMemoryTransactionsRepository } from '@/repositories/in-memory/in-memo
 import { beforeEach, describe, expect, it } from 'vitest';
 import { GetTransactionsInfoUseCase } from './get-transaction-info-use-case';
 import { ResourceNotFoundError } from './errors/resource-not-found-error';
+import { mockTransaction1 } from '@/utils/test/mocks/mocks-transactions';
 
 let transactionsRepository: InMemoryTransactionsRepository;
 let sut: GetTransactionsInfoUseCase;
@@ -15,12 +16,7 @@ describe('Get Transactions Info Use Case', () => {
   beforeEach(() => {
     transactionsRepository = new InMemoryTransactionsRepository();
     sut = new GetTransactionsInfoUseCase(transactionsRepository);
-    transactionMocks = {
-      type: 1,
-      productId: 'product-1',
-      collaboratorId: 'collab-1',
-      userId: 'user-1',
-    };
+    transactionMocks = mockTransaction1;
   });
 
   it('should be able to get transaction info by id', async () => {

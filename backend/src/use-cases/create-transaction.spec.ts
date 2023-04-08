@@ -1,6 +1,7 @@
 import { InMemoryTransactionsRepository } from '@/repositories/in-memory/in-memory-transactions-repository';
 import { beforeEach, describe, expect, it } from 'vitest';
 import { CreateTransactionsUseCase } from './create-transaction-use-case';
+import { mockTransaction1 } from '@/utils/test/mocks/mocks-transactions';
 
 let productsRepository: InMemoryTransactionsRepository;
 let sut: CreateTransactionsUseCase;
@@ -14,12 +15,7 @@ describe('Products Use Case', () => {
   beforeEach(() => {
     productsRepository = new InMemoryTransactionsRepository();
     sut = new CreateTransactionsUseCase(productsRepository);
-    transactionMocks = {
-      type: 1,
-      productId: 'product-1',
-      collaboratorId: 'collab-1',
-      userId: 'user-1',
-    };
+    transactionMocks = mockTransaction1;
   });
 
   it('should be able to create transaction', async () => {
