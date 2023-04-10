@@ -1,13 +1,13 @@
 export interface TransactionFormatted {
-  type: string;
+  type: number;
   date: Date;
   productDescription: string;
-  transactionValue: string;
+  transactionValue: number;
   seller: string;
 }
 
 type TransactionType = {
-  type: string;
+  type: number;
   description: string;
   kind: 'Input' | 'Output';
   signal: '+' | '-';
@@ -15,32 +15,32 @@ type TransactionType = {
 
 const TRANSACTION_TYPES: TransactionType[] = [
   {
-    type: '1',
+    type: 1,
     description: 'Producer Sale',
     kind: 'Input',
     signal: '+',
   },
   {
-    type: '2',
+    type: 2,
     description: 'Affiliated Sale',
     kind: 'Input',
     signal: '+',
   },
   {
-    type: '3',
+    type: 3,
     description: 'Commission paid',
     kind: 'Output',
     signal: '-',
   },
   {
-    type: '4',
+    type: 4,
     description: 'Commission received',
     kind: 'Input',
     signal: '+',
   },
 ];
 
-function getTransactionType(type: string): TransactionType {
+function getTransactionType(type: number): TransactionType {
   return TRANSACTION_TYPES.filter(
     (transaction) => transaction.type === type,
   )[0];
@@ -56,8 +56,8 @@ export async function formatTransaction(
   };
 
   const transactionFormatted = {
-    type: getTransactionType(transaction[0]).type,
-    description: getTransactionType(transaction[0]).description,
+    type: getTransactionType(Number(transaction[0])).type,
+    description: getTransactionType(Number(transaction[0])).description,
     value: transaction.substring(57, 66),
     date: transaction.substring(1, 26),
   };
@@ -66,7 +66,7 @@ export async function formatTransaction(
     type: transactionFormatted.type,
     date: new Date(transactionFormatted.date),
     productDescription: product.name,
-    transactionValue: transactionFormatted.value,
+    transactionValue: Number(transactionFormatted.value) / 100,
     seller,
   };
 }
