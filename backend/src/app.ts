@@ -1,5 +1,6 @@
 import fastifyJwt from '@fastify/jwt';
 import fastifyCookie from '@fastify/cookie';
+import fastifyMultipart from '@fastify/multipart';
 import fastify from 'fastify';
 import { ZodError } from 'zod';
 import { env } from './env';
@@ -22,7 +23,7 @@ app.register(fastifyJwt, {
 });
 
 app.register(fastifyCookie);
-
+app.register(fastifyMultipart);
 app.register(usersRoutes);
 app.register(collaboratorsRoutes);
 app.register(productsRoutes);

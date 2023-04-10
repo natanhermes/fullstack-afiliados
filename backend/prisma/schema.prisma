@@ -23,8 +23,8 @@ model Collaborator {
   id String @id @default(uuid())
 
   type               String
-  name               String
-  commission_balance Int?
+  name               String @unique
+  commission_balance Float?
 
   created_at   DateTime      @default(now())
   products     Product[]
@@ -36,8 +36,8 @@ model Collaborator {
 model Product {
   id           String @id @default(uuid())
   name         String @unique
-  price        Int
-  amount_sales Int
+  price        Float
+  amount_sales Float
 
   collaborator    Collaborator @relation(fields: [collaborator_id], references: [id])
   collaborator_id String
