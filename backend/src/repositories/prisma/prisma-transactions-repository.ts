@@ -1,6 +1,9 @@
 import { prisma } from '@/lib/prisma';
 import { Prisma, Transaction } from '@prisma/client';
-import { TransactionsRepository } from '../transactions-repository';
+import {
+  TransactionsWithoutIds,
+  TransactionsRepository,
+} from '../transactions-repository';
 
 export class PrismaTransactionsRepository implements TransactionsRepository {
   async getTotalAmountTransactionsByProduct(
@@ -29,13 +32,36 @@ export class PrismaTransactionsRepository implements TransactionsRepository {
     return transaction;
   }
 
-  async findManyByUserId(userId: string, page: number): Promise<Transaction[]> {
+  async findManyByUserId(
+    userId: string,
+    page: number,
+  ): Promise<TransactionsWithoutIds[]> {
     const transactions = await prisma.transaction.findMany({
       where: {
         user_id: userId,
       },
+      select: {
+        id: true,
+        type: true,
+        created_at: true,
+        collaborator: {
+          select: {
+            id: true,
+            name: true,
+            type: true,
+          },
+        },
+        product: {
+          select: {
+            id: true,
+            name: true,
+            price: true,
+            amount_sales: true,
+          },
+        },
+      },
       take: 10,
-      skip: (page - 1) * 20,
+      skip: (page - 1) * 10,
     });
 
     return transactions;
