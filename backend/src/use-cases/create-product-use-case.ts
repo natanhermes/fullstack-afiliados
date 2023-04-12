@@ -25,10 +25,6 @@ export class CreateProductsUseCase {
     const productAlreadyExists =
       await this.productsRepository.findProductByName(name);
 
-    if (productAlreadyExists) {
-      throw new ItemAlreadyExistsError();
-    }
-
     const product = await this.productsRepository.create({
       name,
       amount_sales: amountSales,

@@ -9,7 +9,7 @@ export interface TransactionsRepository {
   findTransactionById(id: string): Promise<Transaction | null>;
   findManyByUserId(
     userId: string,
-    page: number,
+    page?: number,
   ): Promise<TransactionsWithoutIds[]>;
   getTotalAmountTransactionsByProduct(
     userId: string,

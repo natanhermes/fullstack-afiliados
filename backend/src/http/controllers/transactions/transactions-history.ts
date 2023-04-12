@@ -7,11 +7,7 @@ export async function transactionsHistory(
   req: FastifyRequest,
   reply: FastifyReply,
 ) {
-  const transactionsHistoryQuerySchema = z.object({
-    page: z.coerce.number().min(1).default(1),
-  });
-
-  const { page } = transactionsHistoryQuerySchema.parse(req.query);
+  const { page } = req.query;
 
   const fetchUserTransactionsUseCase =
     makeFetchUserTransactionsHistoryUseCase();

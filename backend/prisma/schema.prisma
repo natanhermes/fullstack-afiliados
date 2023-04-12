@@ -23,7 +23,7 @@ model Collaborator {
   id String @id @default(uuid())
 
   type               String
-  name               String @unique
+  name               String
   commission_balance Float?
 
   created_at   DateTime      @default(now())
@@ -35,7 +35,7 @@ model Collaborator {
 
 model Product {
   id           String @id @default(uuid())
-  name         String @unique
+  name         String
   price        Float
   amount_sales Float
 
