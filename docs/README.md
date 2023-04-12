@@ -5,7 +5,7 @@
 - [x] Deve ser possível realizar cadastro;
 - [x] Deve ser possível se autenticar;
 - [ ] Deve ser possível gerenciar níveis de acesso na aplicação(usuário admin e colaborador(afiliado e produtor));
-- [ ] Deve ser possível obter dados do perfil logado;
+- [x] Deve ser possível obter dados do perfil logado;
 - [ ] Deve ser possível fazer upload de arquivo(foto de perfil, arquivos das transações);
 - [ ] Deve ser possível fazer o parsing do arquivo recebido e normalizar os dados;
 - [ ] Deve ser possível armazenar os dados normalizados no banco de dados seguindo as definições de interpretação do arquivo;
@@ -13,19 +13,21 @@
 
 ### Regras de Negócio
 
-- O usuário não deve poder se cadastrar com o mesmo e-mail mais de uma vez;
+- [x] O usuário não deve poder se cadastrar com o mesmo e-mail mais de uma vez;
 - O usuário não deve confirmar o envio do formulário anexando o arquivo vazio;
 - O usuário não pode acessar o formulário de upload sem estar logado na aplicação;
 - O usuário deve poder listar as transações de produtos importadas por produtor/afiliado, com um totalizador do valor das transações realizadas;
 - Os produtos importados devem possuir um saldo para contabilizar o total das transações(vendas e pagamento das comissões).
+- O usuário não poderá cadastrar o mesmo produto duas vezes.
 
 ### Requisitos Não Funcionais
 
 - [x] A senha do usuário precisa estar criptografada;
 - [x] Os dados da aplicação precisam estar persistidos em um banco de dados relacional;
-- [ ] Todas as listas de dados precisam estar paginadas em 20 itens por página;
-- [ ] O usuário deve ser identificado por um JWT;
+- [x] Todas as listas de dados precisam estar paginadas em 20 itens por página;
+- [x] O usuário deve ser identificado por um JWT;
 - [x] A aplicação deve utilizar docker para gerenciar os diferentes serviços. Configurar docker-compose;
+- [ ] O usuário poderá cadastrar as transações de maneira manual através de um formulário;
 
 ## Frontend
 
