@@ -1,6 +1,7 @@
 import fastifyJwt from '@fastify/jwt';
 import fastifyCookie from '@fastify/cookie';
 import fastifyMultipart from '@fastify/multipart';
+import fastifyCors from '@fastify/cors';
 import fastify from 'fastify';
 import { ZodError } from 'zod';
 import { env } from './env';
@@ -10,6 +11,10 @@ import { collaboratorsRoutes } from './http/controllers/collaborators/collaborat
 import { transactionsRoutes } from './http/controllers/transactions/transaction.routes';
 
 export const app = fastify();
+
+app.register(fastifyCors, {
+  origin: 'http://localhost:3000',
+});
 
 app.register(fastifyJwt, {
   secret: env.JWT_SECRET,
