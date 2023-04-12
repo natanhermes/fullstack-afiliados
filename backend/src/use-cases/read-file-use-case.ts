@@ -56,18 +56,33 @@ async function createProducersAndProducts(
 ): Promise<void> {
   await Promise.all(
     producers.map(async (product) => {
-      const collab = await collabRepository.create({
-        type: 'producer',
-        name: product.seller,
-        commission_balance: 0,
-      });
+      let collabId = '';
+      const collabExists = await collabRepository.findCollaboratorByName(
+        product.seller,
+      );
 
-      await productsRepository.create({
-        name: product.productDescription,
-        amount_sales: 0,
-        price: product.transactionValue,
-        collaborator_id: collab.id,
-      });
+      const productExists = await productsRepository.findProductByName(
+        product.productDescription,
+      );
+
+      if (!collabExists) {
+        const collab = await collabRepository.create({
+          type: 'producer',
+          name: product.seller,
+          commission_balance: 0,
+        });
+
+        collabId = collab.id;
+      }
+
+      if (!productExists) {
+        await productsRepository.create({
+          name: product.productDescription,
+          amount_sales: 0,
+          price: product.transactionValue,
+          collaborator_id: collabId,
+        });
+      }
     }),
   );
 }
@@ -83,11 +98,16 @@ async function createAffiliateds(
 ): Promise<void> {
   await Promise.all(
     affiliateds.map(async (el) => {
-      await collabRepository.create({
-        type: 'affiliated',
-        name: el.seller,
-        commission_balance: 0,
-      });
+      const collabExists = await collabRepository.findCollaboratorByName(
+        el.seller,
+      );
+      if (!collabExists) {
+        await collabRepository.create({
+          type: 'affiliated',
+          name: el.seller,
+          commission_balance: 0,
+        });
+      }
     }),
   );
 }
@@ -115,6 +135,7 @@ async function creataTransactions(
       const product = await productsRepository.findProductByName(
         transaction.productDescription,
       );
+      console.log(collab, product);
       if (collab && product) {
         await transactionsRepository.create({
           type: transaction.type,
