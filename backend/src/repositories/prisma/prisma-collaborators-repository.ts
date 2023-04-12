@@ -4,7 +4,7 @@ import { CollaboratorsRepository } from '../collaborators-repository';
 
 export class PrismaCollaboratorsRepository implements CollaboratorsRepository {
   async findCollaboratorByName(name: string): Promise<Collaborator | null> {
-    const collab = await prisma.collaborator.findUnique({
+    const collab = await prisma.collaborator.findFirst({
       where: {
         name,
       },

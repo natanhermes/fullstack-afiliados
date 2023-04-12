@@ -34,7 +34,7 @@ export class PrismaTransactionsRepository implements TransactionsRepository {
 
   async findManyByUserId(
     userId: string,
-    page: number,
+    page?: number,
   ): Promise<TransactionsWithoutIds[]> {
     const transactions = await prisma.transaction.findMany({
       where: {
@@ -60,9 +60,11 @@ export class PrismaTransactionsRepository implements TransactionsRepository {
           },
         },
       },
-      take: 10,
-      skip: (page - 1) * 10,
+      take: page && 10,
+      skip: page && (page - 1) * 10,
     });
+
+    console.log('TTRANSACTIONS', transactions);
 
     return transactions;
   }

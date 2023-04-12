@@ -1,5 +1,7 @@
-import { TransactionsRepository } from '@/repositories/transactions-repository';
-import { Transaction } from '@prisma/client';
+import {
+  TransactionsRepository,
+  TransactionsWithoutIds,
+} from '@/repositories/transactions-repository';
 
 interface FetchUserTransactionsHistoryUseCaseRequest {
   userId: string;
@@ -7,7 +9,7 @@ interface FetchUserTransactionsHistoryUseCaseRequest {
 }
 
 interface FetchUserTransactionsHistoryUseCaseResponse {
-  transactions: Transaction[];
+  transactions: TransactionsWithoutIds[];
 }
 
 export class FetchUserTransactionsHistoryUseCase {
@@ -15,7 +17,7 @@ export class FetchUserTransactionsHistoryUseCase {
 
   async execute({
     userId,
-    page = 1,
+    page,
   }: FetchUserTransactionsHistoryUseCaseRequest): Promise<FetchUserTransactionsHistoryUseCaseResponse> {
     const transactions = await this.transactionsRepository.findManyByUserId(
       userId,
