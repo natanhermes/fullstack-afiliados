@@ -13,7 +13,7 @@ import { transactionsRoutes } from './http/controllers/transactions/transaction.
 export const app = fastify();
 
 app.register(fastifyCors, {
-  origin: 'http://localhost:3000',
+  origin: '*',
 });
 
 app.register(fastifyJwt, {
