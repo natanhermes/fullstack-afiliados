@@ -3,6 +3,15 @@ import { Prisma, Product } from '@prisma/client';
 import { ProductsRepository } from '../products-repository';
 
 export class PrismaProductsRepository implements ProductsRepository {
+  async findProductByName(name: string): Promise<Product | null> {
+    const product = await prisma.product.findFirst({
+      where: {
+        name,
+      },
+    });
+
+    return product;
+  }
   async findProductById(id: string): Promise<Product | null> {
     const product = await prisma.product.findUnique({
       where: {

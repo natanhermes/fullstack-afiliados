@@ -3,6 +3,7 @@ import { AuthenticateUseCase } from './authenticate';
 import { InMemoryUsersRepository } from '@/repositories/in-memory/in-memory-users-repository';
 import { hash } from 'bcryptjs';
 import { InvalidCredentialsError } from './errors/invalid-credentials-error';
+import { mockUser } from '@/utils/test/mocks/mocks-users';
 
 let usersRepository: InMemoryUsersRepository;
 /**
@@ -17,11 +18,7 @@ describe('Authenticate Use Case', () => {
   });
 
   it('should be able to authenticate', async () => {
-    const { email, name, password } = {
-      name: 'John Doe',
-      email: 'johndoe@example.com',
-      password: '123456',
-    };
+    const { email, name, password } = mockUser;
 
     await usersRepository.create({
       name,
@@ -40,8 +37,8 @@ describe('Authenticate Use Case', () => {
 
   it('should not be able to authenticate with wrong email', async () => {
     const credentialsToAuthenticate = {
-      email: 'johndoe@example.com',
-      password: '123456',
+      email: mockUser.email,
+      password: mockUser.password,
     };
 
     const handleAuthenticateIncorrrectCredentials = () =>
@@ -52,11 +49,7 @@ describe('Authenticate Use Case', () => {
   });
 
   it('should not be able to authenticate with wrong password', async () => {
-    const { email, name, password } = {
-      name: 'John Doe',
-      email: 'johndoe@example.com',
-      password: '123456',
-    };
+    const { email, name, password } = mockUser;
 
     await usersRepository.create({
       name,

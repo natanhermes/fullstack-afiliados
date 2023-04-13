@@ -1,7 +1,10 @@
 import { InMemoryTransactionsRepository } from '@/repositories/in-memory/in-memory-transactions-repository';
 import { beforeEach, describe, expect, it } from 'vitest';
 import { FetchUserTransactionsHistoryUseCase } from './fetch-user-transactions-history-use-case';
-
+import {
+  mockTransaction1,
+  mockTransaction2,
+} from '@/utils/test/mocks/mocks-transactions';
 let transactionsRepository: InMemoryTransactionsRepository;
 let sut: FetchUserTransactionsHistoryUseCase;
 let transactionsMocks: {
@@ -15,20 +18,7 @@ describe('Fetch User Transactions History Use Case', () => {
   beforeEach(() => {
     transactionsRepository = new InMemoryTransactionsRepository();
     sut = new FetchUserTransactionsHistoryUseCase(transactionsRepository);
-    transactionsMocks = [
-      {
-        type: 1,
-        productId: 'product-1',
-        collaboratorId: 'collab-1',
-        userId: 'user-1',
-      },
-      {
-        type: 2,
-        productId: 'product-2',
-        collaboratorId: 'collab-2',
-        userId: 'user-1',
-      },
-    ];
+    transactionsMocks = [mockTransaction1, mockTransaction2];
   });
 
   it('should be able to fetch transaction history', async () => {
