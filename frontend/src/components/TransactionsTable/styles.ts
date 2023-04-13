@@ -23,6 +23,10 @@ export const Container = styled.div`
     width: 100%;
     border-spacing: 0rem 0.5rem;
 
+    tr:nth-child(2n) {
+      background-color: var(--gray);
+    }
+
     th {
       padding: 1rem 2rem;
       font-weight: 400;
