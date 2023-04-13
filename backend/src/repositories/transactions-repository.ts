@@ -11,9 +11,5 @@ export interface TransactionsRepository {
     userId: string,
     page?: number,
   ): Promise<TransactionsWithoutIds[]>;
-  getTotalAmountTransactionsByProduct(
-    userId: string,
-    productId: string,
-  ): Promise<number>;
   create(data: Prisma.TransactionUncheckedCreateInput): Promise<Transaction>;
 }
