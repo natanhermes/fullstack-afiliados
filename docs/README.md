@@ -4,21 +4,20 @@
 
 - [x] Deve ser possível realizar cadastro;
 - [x] Deve ser possível se autenticar;
-- [ ] Deve ser possível gerenciar níveis de acesso na aplicação(usuário admin e colaborador(afiliado e produtor));
 - [x] Deve ser possível obter dados do perfil logado;
-- [ ] Deve ser possível fazer upload de arquivo(foto de perfil, arquivos das transações);
-- [ ] Deve ser possível fazer o parsing do arquivo recebido e normalizar os dados;
-- [ ] Deve ser possível armazenar os dados normalizados no banco de dados seguindo as definições de interpretação do arquivo;
-- [ ] Deve ser possível exibir a lista das transações de produtos importadas por produtor/afiliado com um totalizador do valor das transações realizadas;
+- [x] Deve ser possível fazer upload de arquivo(arquivos das transações);
+- [x] Deve ser possível fazer o parsing do arquivo recebido e normalizar os dados;
+- [x] Deve ser possível armazenar os dados normalizados no banco de dados seguindo as definições de interpretação do arquivo;
+- [x] Deve ser possível exibir a lista das transações de produtos importadas por produtor/afiliado com um totalizador do valor das transações realizadas;
 
 ### Regras de Negócio
 
 - [x] O usuário não deve poder se cadastrar com o mesmo e-mail mais de uma vez;
-- O usuário não deve confirmar o envio do formulário anexando o arquivo vazio;
-- O usuário não pode acessar o formulário de upload sem estar logado na aplicação;
-- O usuário deve poder listar as transações de produtos importadas por produtor/afiliado, com um totalizador do valor das transações realizadas;
-- Os produtos importados devem possuir um saldo para contabilizar o total das transações(vendas e pagamento das comissões).
-- O usuário não poderá cadastrar o mesmo produto duas vezes.
+- [x] O usuário não deve confirmar o envio do formulário anexando o arquivo vazio;
+- [x] O usuário não pode acessar o formulário de upload sem estar logado na aplicação;
+- [x] O usuário deve poder listar as transações de produtos importadas por produtor/afiliado, com um totalizador do valor das transações realizadas;
+- [x] Os produtos importados devem possuir um saldo para contabilizar o total das transações(vendas e pagamento das comissões).
+- [x] O usuário não poderá cadastrar o mesmo produto duas vezes.
 
 ### Requisitos Não Funcionais
 
@@ -34,11 +33,12 @@
 ### Requisitos Funcionais
 
 - [ ] Deve possuir uma tela de apresentação da plataforma;
-- [ ] Deve possuir uma tela para efetuar login via formulário;
+- [x] Deve possuir uma tela para efetuar login via formulário;
+- [x] Deve possuir validação de e-mail no cadastro;
 - [ ] Deve possuir validação de e-mail existente antes de realizar o cadastro;
-- [ ] Deve possuir tela de acesso não autorizado caso não tenha efetuado login ou a sessão tenha sido expirada;
-- [ ] Deve possuir uma tela para upload do arquivo via formulário;
-- [ ] Deve possuir uma tela para listagem das transações por produtor/afiliado;
+- [x] O usuário deve ser redirecionado para a página de login caso tente acessar alguma rota que necessite estar logado;
+- [x] Deve possuir uma tela para upload do arquivo via formulário;
+- [x] Deve possuir uma tela para listagem das transações por produtor/afiliado;
 
 ### Requisitos Não Funcionais
 
