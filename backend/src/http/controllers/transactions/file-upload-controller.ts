@@ -15,12 +15,12 @@ export async function transactionsUpload(
 
     const readFileUseCase = makeReadFileUseCase();
 
-    const a = await readFileUseCase.execute({
+    const transactionsFormatted = await readFileUseCase.execute({
       transactions,
       userId: req.user.sub,
     });
 
-    return reply.status(201).send(a);
+    return reply.status(201).send(transactionsFormatted);
   } catch (err) {
     console.log(err);
     return reply.status(500).send({
