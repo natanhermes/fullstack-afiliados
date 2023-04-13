@@ -69,10 +69,14 @@ describe('Transactions History (e2e)', () => {
     expect(res.statusCode).toEqual(200);
     expect(res.body.transactions).toEqual([
       expect.objectContaining({
-        user_id: user.id,
+        collaborator: expect.objectContaining({
+          id: collab.id,
+        }),
       }),
       expect.objectContaining({
-        user_id: user.id,
+        collaborator: expect.objectContaining({
+          id: collab.id,
+        }),
       }),
     ]);
   });

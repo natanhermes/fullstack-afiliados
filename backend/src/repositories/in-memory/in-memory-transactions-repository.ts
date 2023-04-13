@@ -5,9 +5,15 @@ import { randomUUID } from 'node:crypto';
 export class InMemoryTransactionsRepository implements TransactionsRepository {
   public items: Transaction[] = [];
   async findManyByUserId(userId: string, page: number): Promise<Transaction[]> {
-    return this.items
-      .filter((transaction) => transaction.user_id === userId)
-      .slice((page - 1) * 10, page * 10);
+    const transactions = this.items.filter(
+      (transaction) => transaction.user_id === userId,
+    );
+
+    if (page) {
+      return transactions.slice((page - 1) * 10, page * 10);
+    }
+
+    return transactions;
   }
   async findTransactionById(id: string): Promise<Transaction | null> {
     const product = this.items.find((el) => el.id === id);
