@@ -64,8 +64,6 @@ export class PrismaTransactionsRepository implements TransactionsRepository {
       skip: page && (page - 1) * 10,
     });
 
-    console.log('TTRANSACTIONS', transactions);
-
     return transactions;
   }
   async create(data: Prisma.TransactionUncheckedCreateInput) {

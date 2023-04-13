@@ -135,7 +135,6 @@ async function creataTransactions(
       const product = await productsRepository.findProductByName(
         transaction.productDescription,
       );
-      console.log(collab, product);
       if (collab && product) {
         await transactionsRepository.create({
           type: transaction.type,
