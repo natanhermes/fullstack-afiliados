@@ -17,4 +17,6 @@ jobs:
 
       - run: npm ci
 
+      - run: cd backend
+
       - run: npm run test
