@@ -27,10 +27,10 @@ jobs:
           cache-dependency-path: ./backend/package-lock.json
 
       - run: npm ci
-        working-directory: ./backend/package-lock.json
+        working-directory: ./backend
 
       - run: npm run test:e2e
         env:
           JWT_SECRET: testing
           DATABASE_URL: "postgresql://docker:docker@localhost:5432/apiaffiliated?schema=public"
-        working-directory: ./backend/package-lock.json
+        working-directory: ./backend
