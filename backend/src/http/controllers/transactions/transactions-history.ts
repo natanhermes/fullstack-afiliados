@@ -1,13 +1,12 @@
 import { FastifyRequest, FastifyReply } from 'fastify';
 
-import { z } from 'zod';
 import { makeFetchUserTransactionsHistoryUseCase } from '@/use-cases/factories/make-fetch-user-transactions-history-use-case';
 
 export async function transactionsHistory(
   req: FastifyRequest,
   reply: FastifyReply,
 ) {
-  const { page } = req.query;
+  const { page } = req.query as { page: number };
 
   const fetchUserTransactionsUseCase =
     makeFetchUserTransactionsHistoryUseCase();

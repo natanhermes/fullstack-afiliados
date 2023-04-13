@@ -27,10 +27,6 @@ export function Summary() {
     .map((transaction) => transaction.product.price)
     .reduce((acc, crr) => acc + crr, 0);
 
-  console.log('out', outputTransactions);
-
-  console.log('in', inputTransactions);
-
   return (
     <Container>
       <div>
