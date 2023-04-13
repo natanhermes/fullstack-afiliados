@@ -42,5 +42,5 @@
 
 ### Requisitos Não Funcionais
 
-- [ ] No formulário de login deve conter opção para cadastro;
-- [ ] O formulário de upload deve possuir validação e impedir o submit vazio ou contendo arquivo vazio;
+- [x] No formulário de login deve conter opção para cadastro;
+- [x] O formulário de upload deve possuir validação e impedir o submit vazio ou contendo arquivo vazio;
