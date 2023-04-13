@@ -10,6 +10,11 @@ The definitions of the requests and the strategies for creating the application 
 
 - The prototype created in [figma](https://www.figma.com) can be viewed at [this link](https://www.figma.com/file/ejQP2VeqcOPoucWYJoitTn/Afiliados?node-id=0-1&t=z3dBYz7y0SRYsTRu-0).
 
+## Project Scrum
+
+- I created a flow to simulate a scrum board with all the decision making I had during the development of this project. If you want to view it, click here.
+  PS.: the board is in Portuguese.
+
 ## Frameworks and languages ​​used:
 
 - Backend:
@@ -47,12 +52,12 @@ The definitions of the requests and the strategies for creating the application 
 - Step two: setup api
   - Install dependencies(use [node version 18](https://nodejs.org/en/download)):
     ```sh
-    cd backend && npm install
+    cd fullstack-afiliados && cd backend && npm install
     ```
   - Rename file from [.env.example](/backend/.env.example) to ".env".
     Run:
     ```sh
-    mv .env.example .env
+    cp .env.example .env
     ```
   - If you don't have docker installed, follow these steps to install it:
     - For windows: https://docs.docker.com/desktop/install/windows-install/
@@ -85,7 +90,7 @@ The definitions of the requests and the strategies for creating the application 
   - Rename file from [.env.example](/backend/.env.example) to ".env".
     Run:
     ```sh
-    mv .env.example .env
+    cp .env.example .env
     ```
 - Step two:
   - Run app in dev mode:
