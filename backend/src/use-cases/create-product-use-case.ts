@@ -22,8 +22,7 @@ export class CreateProductsUseCase {
     price,
     collaboratorId,
   }: CreateProductsUseCaseRequest): Promise<CreateProductsUseCaseResponse> {
-    const productAlreadyExists =
-      await this.productsRepository.findProductByName(name);
+    await this.productsRepository.findProductByName(name);
 
     const product = await this.productsRepository.create({
       name,
