@@ -30,8 +30,8 @@ export function NewTransactionModal({
 }: NewTransactionModalProps) {
   const inputRef = useRef<HTMLInputElement>(null);
 
-  const notify = () =>
-    toast('Selecione o arquivo para upload!', {
+  const notify = (message: string) =>
+    toast(message, {
       autoClose: 1000,
     });
   const { uploadFile } = useContext(TransactionsContext);
@@ -47,9 +47,10 @@ export function NewTransactionModal({
     event.preventDefault();
 
     if (!file.name) {
-      notify();
+      notify('Selecione o arquivo para upload.');
       return;
     }
+
     toast.promise(uploadFile(file), {
       pending: 'Realizando upload. Aguarde...',
       success: 'Upload realizado com sucesso!',
@@ -57,6 +58,13 @@ export function NewTransactionModal({
     });
 
     setTimeout(closeModal, TOAST_DURATION_IN_MS);
+  }
+
+  function handleOnChange(file: File) {
+    if (file.type !== 'text/plain') {
+      notify('Arquivo inválido. Selecione um arquivo de texto(.txt)');
+    }
+    setFile(file);
   }
 
   return (
@@ -82,13 +90,17 @@ export function NewTransactionModal({
               id="uploadFile"
               type="file"
               name="sales"
-              onChange={(e) => setFile(e.target.files![0])}
+              onChange={(e) => handleOnChange(e.target.files![0])}
             />
           </label>
         </InputFileContainer>
         <ButtonContainer>
           <Button type="submit">Importar</Button>
-          <ToastContainer autoClose={TOAST_DURATION_IN_MS} />
+          <ToastContainer
+            theme="dark"
+            progressStyle={{ backgroundColor: 'var(--primary)' }}
+            autoClose={TOAST_DURATION_IN_MS}
+          />
         </ButtonContainer>
       </Container>
     </Modal>
