@@ -1,13 +1,23 @@
-import fs from 'fs';
+import fs from 'fs-extra';
+import tmp from 'tmp-promise';
 import pump, { Stream } from 'pump';
 
 export async function processFile(file: Stream): Promise<string[]> {
-  const storedFile = fs.createWriteStream('./tmp/file.txt');
-  await pump(file, storedFile);
+  const tmpDir = await tmp.dir({ prefix: 'myapp-' });
 
-  const transactions = (
-    await fs.promises.readFile('./tmp/file.txt', 'utf-8')
-  ).split('\n');
+  const filePath = tmpDir.path + '/file.txt';
 
-  return transactions.filter((el) => !!el);
+  await new Promise<void>((resolve, reject) => {
+    const writeStream = fs.createWriteStream(filePath);
+    pump(file, writeStream, (err) => {
+      if (err) reject(err);
+      else resolve();
+    });
+  });
+
+  const transactions = await fs.readFile(filePath, 'utf-8');
+
+  await fs.remove(tmpDir.path);
+
+  return transactions.split('\n').filter((el) => !!el);
 }
