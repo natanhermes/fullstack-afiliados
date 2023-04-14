@@ -37,7 +37,7 @@ export const MenuDropdown = styled.div`
   position: absolute;
   top: 100%;
   right: 0;
-  width: 100%;
+  width: 10rem;
 
   z-index: 9999;
 `;
