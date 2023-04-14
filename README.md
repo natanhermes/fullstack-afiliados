@@ -97,3 +97,33 @@ The definitions of the requests and the strategies for creating the application 
     ```sh
     npm run dev
     ```
+
+### How to use the platform
+
+- It is necessary to register with name, email and password.
+
+- After registering, log in using your email and password.
+
+- To view the data on screen, it is necessary to upload the text file containing the transactions.
+
+- The text file must follow the following structure:
+
+  ```txt
+  12022-01-15T19:20:30-03:00CURSO DE BEM-ESTAR            0000012750JOSE CARLOS
+  ```
+
+  - **\*Where the 1st position refers to the type of transaction, which can be:**
+    1 - Producer sale
+    2 - Affiliate sale
+    3 - Commission paid
+    4 - Commission received
+  - **From the 2nd to the 26th position, it refers to the date of the transaction, in ISO 8601 format(YYYY-MM-DDTHH:MM:SS±HH:MM):**
+    Ex.: 2022-01-15T19:20:30-03:00
+  - **From the 27th position to the 56th, it refers to the product description:**
+    Ex.: CURSO DE BEM-ESTAR
+  - **From position 57 to 66, it refers to the value in cents of the transaction:**
+    Ex.: 0000012750
+  - **Finally, from position 67 onwards, it refers to the name of the producer or affiliate:**
+    Ex.: JOSE CARLOS
+
+- When uploading, the list with the processed data will be displayed.
