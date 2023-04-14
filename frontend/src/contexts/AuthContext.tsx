@@ -5,11 +5,13 @@ import { createContext, ReactNode, useEffect, useState } from 'react';
 import { setCookie, parseCookies, destroyCookie } from 'nookies';
 
 import { api } from '../services/client';
-import { AxiosError, AxiosResponse } from 'axios';
+import { AxiosError } from 'axios';
 
 interface User {
+  id: string;
   name: string;
   email: string;
+  created_at: string;
 }
 
 interface SignInCredentials {
@@ -58,13 +60,11 @@ export function AuthProvider({ children }: AuthProviderProps) {
 
     if (token) {
       getUserData()
-        .then((response: AxiosResponse) => {
-          const { email, name } = response.data;
-
-          setUser({ email, name });
+        .then((user: User) => {
+          setUser(user);
         })
-        .catch(() => {
-          signOut();
+        .catch((err) => {
+          console.log(err);
         });
     }
   }, []);
@@ -101,10 +101,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
 
       const user = await getUserData();
 
-      setUser({
-        email: user.email,
-        name: user.name,
-      });
+      setUser(user);
 
       Router.push('/dashboard');
     } catch (err) {
