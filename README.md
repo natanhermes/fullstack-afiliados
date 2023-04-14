@@ -10,9 +10,13 @@ The definitions of the requests and the strategies for creating the application 
 
 - The prototype created in [figma](https://www.figma.com) can be viewed at [this link](https://www.figma.com/file/ejQP2VeqcOPoucWYJoitTn/Afiliados?node-id=0-1&t=z3dBYz7y0SRYsTRu-0).
 
+## Project Presentation
+
+- Check out the project presentation at [this link](https://drive.google.com/file/d/1kNd5vaPMw0mKSOYE2OjBtU83qgjbl30F/view?usp=sharing).
+
 ## Project Scrum
 
-- I created a flow to simulate a scrum board with all the decision making I had during the development of this project. If you want to view it, click here.
+- I created a flow to simulate a scrum board with all the decision making I had during the development of this project. If you want to view it, [click here](https://www.notion.so/e479b79f3c7c4439aeba102860deea5b?v=22fead5d10b544eb9475bcecb0470065).
   PS.: the board is in Portuguese.
 
 ## Frameworks and languages ​​used:
